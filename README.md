@@ -32,7 +32,7 @@ python -m http.server 4173 --bind 0.0.0.0
 
 可选字段：`日期`、`订单号`、`状态`、`评分`、`评价`、`退款`
 
-示例文件见 `sample-orders.csv`。CSV 中带逗号的评价内容需要使用双引号包裹。
+示例文件见 `sample-orders.csv` 和 `demo-orders.csv`。网站顶部也提供了“下载示例 CSV”按钮。CSV 中带逗号的评价内容需要使用双引号包裹。
 
 ## 后续产品化方向
 
