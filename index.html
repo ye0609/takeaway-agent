@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>外卖经营助手</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <div class="brand-mark">食</div>
+          <div>
+            <div class="brand-name">外卖经营助手</div>
+            <div class="brand-subtitle">店铺运营工作台</div>
+          </div>
+        </div>
+
+        <nav class="main-nav" aria-label="主导航">
+          <button class="nav-item active" data-target="#page-header" data-title="经营概览" type="button"><span class="nav-icon">⌂</span>经营概览</button>
+          <button class="nav-item" data-target="#trend-panel" data-title="订单分析" type="button"><span class="nav-icon">▤</span>订单分析</button>
+          <button class="nav-item" data-target="#insight-panel" data-title="经营建议" type="button"><span class="nav-icon">✦</span>经营建议</button>
+          <button class="nav-item" data-target="#reviews-panel" data-title="评价中心" type="button"><span class="nav-icon">☷</span>评价中心</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="connection-dot"></div>
+          <div>
+            <div class="connection-title">本地数据模式</div>
+            <div class="connection-copy">数据仅在当前浏览器处理</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar" id="page-header">
+          <div>
+            <div class="eyebrow">MONDAY · 2026 年 9 月 14 日</div>
+            <h1 id="page-title">经营概览</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="upload-button" for="csv-file">导入订单 CSV</label>
+            <input id="csv-file" type="file" accept=".csv,text/csv" hidden />
+            <button class="primary-button" id="demo-button" type="button">加载示例数据</button>
+          </div>
+        </header>
+
+        <section class="store-strip" aria-label="当前店铺信息">
+          <div class="store-avatar">禾</div>
+          <div class="store-info">
+            <div class="store-name">禾下快餐 · 校园店</div>
+            <div class="store-meta"><span class="status-pill"><span></span>营业中</span> 数据周期：2026/09/08 - 2026/09/14</div>
+          </div>
+          <div class="store-actions">
+            <button class="ghost-button" id="copy-report" type="button">复制日报</button>
+            <button class="icon-button" title="更多选项" aria-label="更多选项" type="button">•••</button>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="核心指标">
+          <article class="metric-card metric-primary">
+            <div class="metric-label">本周销售额 <span class="metric-help">?</span></div>
+            <div class="metric-value" id="metric-revenue">¥0</div>
+            <div class="metric-change neutral" id="metric-revenue-change">当前周期统计</div>
+            <div class="metric-icon revenue-icon">¥</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">有效订单</div>
+            <div class="metric-value" id="metric-orders">0</div>
+            <div class="metric-change neutral" id="metric-orders-change">当前周期统计</div>
+            <div class="metric-icon order-icon">#</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">平均客单价</div>
+            <div class="metric-value" id="metric-average">¥0</div>
+            <div class="metric-change neutral" id="metric-average-change">按当前订单计算</div>
+            <div class="metric-icon average-icon">↗</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label">退款率</div>
+            <div class="metric-value" id="metric-refund">0%</div>
+            <div class="metric-change neutral" id="metric-refund-change">基于当前订单</div>
+            <div class="metric-icon refund-icon">✓</div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel trend-panel" id="trend-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>销售趋势</h2>
+                <p>每日销售额与订单量</p>
+              </div>
+              <div class="legend"><span class="legend-item"><i class="legend-line revenue-line"></i>销售额</span><span class="legend-item"><i class="legend-bar order-line"></i>订单量</span></div>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-y-labels"><span>¥1,500</span><span>¥1,000</span><span>¥500</span><span>¥0</span></div>
+              <canvas id="trend-chart" width="720" height="250" aria-label="销售趋势图"></canvas>
+              <div class="chart-x-labels" id="chart-labels"></div>
+            </div>
+          </article>
+
+          <article class="panel insight-panel" id="insight-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>今日重点</h2>
+                <p>基于最近 7 天数据</p>
+              </div>
+              <span class="ai-badge">自动分析</span>
+            </div>
+            <div class="insight-list" id="insight-list"></div>
+            <button class="text-button" id="refresh-insights" type="button">重新生成建议 <span>→</span></button>
+          </article>
+        </section>
+
+        <section class="content-grid lower-grid">
+          <article class="panel products-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>热销商品</h2>
+                <p>按销售额排序</p>
+              </div>
+              <button class="small-select" type="button">本周 <span>⌄</span></button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>商品</th><th>销量</th><th>销售额</th><th>趋势</th></tr></thead>
+                <tbody id="products-table"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel reviews-panel" id="reviews-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>评价信号</h2>
+                <p id="review-period">最近评价</p>
+              </div>
+              <span class="rating-summary"><strong id="rating-score">4.8</strong> / 5.0</span>
+            </div>
+            <div class="review-bars" id="review-bars"></div>
+            <div class="review-divider"></div>
+            <div class="review-highlight" id="review-highlight"></div>
+          </article>
+        </section>
+
+        <div class="data-note" id="data-note">当前使用示例数据。导入 CSV 后，页面会在本地重新计算指标。</div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js?v=2"></script>
+  </body>
+</html>
