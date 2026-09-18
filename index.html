@@ -18,10 +18,10 @@
         </div>
 
         <nav class="main-nav" aria-label="主导航">
-          <button class="nav-item active" type="button"><span class="nav-icon">⌂</span>经营概览</button>
-          <button class="nav-item" type="button"><span class="nav-icon">▤</span>订单分析</button>
-          <button class="nav-item" type="button"><span class="nav-icon">✦</span>经营建议</button>
-          <button class="nav-item" type="button"><span class="nav-icon">☷</span>评价中心</button>
+          <button class="nav-item active" data-target="#page-header" data-title="经营概览" type="button"><span class="nav-icon">⌂</span>经营概览</button>
+          <button class="nav-item" data-target="#trend-panel" data-title="订单分析" type="button"><span class="nav-icon">▤</span>订单分析</button>
+          <button class="nav-item" data-target="#insight-panel" data-title="经营建议" type="button"><span class="nav-icon">✦</span>经营建议</button>
+          <button class="nav-item" data-target="#reviews-panel" data-title="评价中心" type="button"><span class="nav-icon">☷</span>评价中心</button>
         </nav>
 
         <div class="sidebar-footer">
@@ -34,10 +34,10 @@
       </aside>
 
       <main class="main-content">
-        <header class="topbar">
+        <header class="topbar" id="page-header">
           <div>
             <div class="eyebrow">MONDAY · 2026 年 9 月 14 日</div>
-            <h1>经营概览</h1>
+            <h1 id="page-title">经营概览</h1>
           </div>
           <div class="topbar-actions">
             <label class="upload-button" for="csv-file">导入订单 CSV</label>
@@ -86,7 +86,7 @@
         </section>
 
         <section class="content-grid">
-          <article class="panel trend-panel">
+          <article class="panel trend-panel" id="trend-panel">
             <div class="panel-heading">
               <div>
                 <h2>销售趋势</h2>
@@ -101,7 +101,7 @@
             </div>
           </article>
 
-          <article class="panel insight-panel">
+          <article class="panel insight-panel" id="insight-panel">
             <div class="panel-heading">
               <div>
                 <h2>今日重点</h2>
@@ -131,7 +131,7 @@
             </div>
           </article>
 
-          <article class="panel reviews-panel">
+          <article class="panel reviews-panel" id="reviews-panel">
             <div class="panel-heading">
               <div>
                 <h2>评价信号</h2>

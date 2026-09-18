@@ -144,6 +144,18 @@ function renderAll() {
   renderReviews(summary);
 }
 
+function switchNavigation(button) {
+  document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item === button));
+  $("#page-title").textContent = button.dataset.title;
+  const target = $(button.dataset.target);
+  if (!target) return;
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (target.classList.contains("panel")) {
+    target.classList.remove("panel-focus");
+    window.requestAnimationFrame(() => target.classList.add("panel-focus"));
+  }
+}
+
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[char]));
 }
@@ -199,6 +211,7 @@ $("#csv-file").addEventListener("change", (event) => {
   reader.readAsText(file, "UTF-8");
 });
 $("#refresh-insights").addEventListener("click", () => { renderAll(); showToast("建议已根据当前数据刷新"); });
+document.querySelectorAll(".nav-item").forEach((button) => button.addEventListener("click", () => switchNavigation(button)));
 $("#copy-report").addEventListener("click", async () => {
   const summary = summarize(rows);
   const report = `禾下快餐 · 校园店经营日报\n销售额：${money(summary.revenue)}\n有效订单：${summary.completed.length} 单\n平均客单价：${money(summary.revenue / Math.max(summary.completed.length, 1))}\n退款率：${percent(summary.refunds / Math.max(rows.length, 1) * 100)}\n热销商品：${summary.products[0]?.item || "暂无"}`;
